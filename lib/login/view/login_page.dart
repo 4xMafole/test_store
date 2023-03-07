@@ -27,33 +27,40 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      'eCommerce',
+                      'eComerce',
                       style: TextStyle(
                         fontSize: size.width * 0.1,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(height: size.height * 0.05),
+                    SizedBox(height: size.height * 0.09),
                     SizedBox(
                       width: size.width * 0.8,
-                      child: const TextField(
+                      child: TextField(
                         decoration: InputDecoration(
                           hintText: 'User name',
+                          hintStyle: TextStyle(
+                            color: Colors.grey.shade500,
+                          ),
                         ),
                       ),
                     ),
                     SizedBox(height: size.height * 0.02),
                     SizedBox(
                       width: size.width * 0.8,
-                      child: TextField(
+                      child: TextFormField(
                         obscureText: _isObscure,
                         decoration: InputDecoration(
+                          focusColor: const Color.fromARGB(255, 31, 108, 114),
                           hintText: 'Password',
+                          hintStyle: TextStyle(
+                            color: Colors.grey.shade500,
+                          ),
                           suffixIcon: IconButton(
                             icon: Icon(
                               _isObscure
-                                  ? Icons.visibility_off
-                                  : Icons.visibility,
+                                  ? Icons.visibility_off_outlined
+                                  : Icons.visibility_outlined,
                             ),
                             onPressed: () {
                               setState(() {
@@ -65,25 +72,35 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     SizedBox(height: size.height * 0.02),
-                    GestureDetector(
-                      onTap: () {
-                        // Navigate to forgot password screen
-                      },
-                      child: const Align(
-                        alignment: Alignment.centerRight,
-                        child: Text(
-                          'Forgot Password',
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            color: Colors.blue,
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: GestureDetector(
+                        onTap: () {
+                          // Navigate to forgot password screen
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 30,
+                          ),
+                          child: const Text(
+                            'Forgot Password',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 35, 118, 124),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                    SizedBox(height: size.height * 0.02),
+                    SizedBox(height: size.height * 0.07),
                     SizedBox(
                       width: size.width * 0.8,
+                      height: size.height * 0.07,
                       child: ElevatedButton(
+                        style: const ButtonStyle(
+                          backgroundColor: MaterialStatePropertyAll(
+                            Color.fromARGB(255, 31, 108, 114),
+                          ),
+                        ),
                         onPressed: () {
                           // Handle login button press
                         },
