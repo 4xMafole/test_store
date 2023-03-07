@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -9,15 +10,13 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    final size = MediaQuery.of(context).size;
+    return Scaffold(
       body: Center(
         child: Text(
           'eComerce',
-          style: TextStyle(
-            fontSize: 70,
-            color: Color.fromARGB(255, 31, 108, 114),
-            fontWeight: FontWeight.bold,
-          ),
+          style: GoogleFonts.playfairDisplay().copyWith(
+              fontSize: size.width * 0.14, fontWeight: FontWeight.bold),
         ),
       ),
     );

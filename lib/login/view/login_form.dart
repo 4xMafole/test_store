@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 
 import 'package:test_store/login/bloc/login_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({super.key});
@@ -94,10 +95,8 @@ class TextLogo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       'eComerce',
-      style: TextStyle(
-        fontSize: size.width * 0.1,
-        fontWeight: FontWeight.bold,
-      ),
+      style: GoogleFonts.playfairDisplay()
+          .copyWith(fontSize: size.width * 0.14, fontWeight: FontWeight.bold),
     );
   }
 }

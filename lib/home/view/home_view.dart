@@ -97,7 +97,7 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
             const Padding(
-              padding: const EdgeInsets.only(left: 12.0),
+              padding: const EdgeInsets.only(left: 12.0, bottom: 8),
               child: const Text(
                 'The best prices',
                 style: TextStyle(
@@ -109,20 +109,20 @@ class _HomeViewState extends State<HomeView> {
             ),
             Expanded(
               child: BlocBuilder<ProductsCubit, ProductsState>(
-                buildWhen: (previous, current) =>
-                    previous.products != current.products,
                 builder: (context, state) {
                   return RefreshIndicator(
+                    color: Colors.grey.shade800,
                     onRefresh: () async =>
                         context.read<ProductsCubit>().refreshProducts(),
                     child: GridView.builder(
+                      physics: const AlwaysScrollableScrollPhysics(),
                       padding: const EdgeInsets.all(10),
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         mainAxisSpacing: 15,
                         crossAxisSpacing: 15,
-                        childAspectRatio: 0.9,
+                        childAspectRatio: 0.8,
                       ),
                       itemCount: state.products.length,
                       itemBuilder: (BuildContext context, int index) {
@@ -147,8 +147,7 @@ class _HomeViewState extends State<HomeView> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: <Widget>[
                               Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.22,
+                                height: 100,
                                 decoration: BoxDecoration(
                                   borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(10),

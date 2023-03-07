@@ -32,8 +32,8 @@ class ProductsCubit extends HydratedCubit<ProductsState> {
   }
 
   Future<void> refreshProducts() async {
-    if (!state.status.isSuccess) return;
-    if (state.products == <Product>[]) return;
+    // if (!state.status.isSuccess) return;
+    // if (state.products == <Product>[]) return;
 
     try {
       final products = await _storeRepository.getProducts();
