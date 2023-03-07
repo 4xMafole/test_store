@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List<dynamic> items = [];
 
   Future<List<dynamic>> getItems() async {
@@ -41,32 +42,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: Builder(
-          builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
-            );
-          },
-        ),
-        actions: <Widget>[
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: TextField(
-              decoration: InputDecoration(
-                hintText: 'Search',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                suffixIcon: const Icon(Icons.search),
-              ),
-            ),
-          ),
-        ],
-      ),
+      key: _scaffoldKey,
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -86,15 +62,62 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          const Padding(
-            padding: EdgeInsets.only(
-              top: 10,
-              left: 10,
+      body: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 0, 8, 0),
+                  child: Align(
+                    child: IconButton(
+                      icon: const Icon(Icons.menu),
+                      onPressed: () {
+                        _scaffoldKey.currentState!.openDrawer();
+                      },
+                      color: Color.fromRGBO(0, 0, 0, 1),
+                      iconSize: 32,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Align(
+                    child: Container(
+                      margin: EdgeInsets.zero,
+                      padding: EdgeInsets.zero,
+                      width: MediaQuery.of(context).size.width,
+                      height: 35,
+                      decoration: BoxDecoration(
+                        color: Color.fromRGBO(0, 0, 0, 0.078),
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      child: const TextField(
+                        cursorColor: Color.fromARGB(255, 31, 108, 114),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w400,
+                          fontStyle: FontStyle.normal,
+                          fontSize: 14,
+                        ),
+                        decoration: InputDecoration(
+                          disabledBorder: InputBorder.none,
+                          focusedBorder: InputBorder.none,
+                          enabledBorder: InputBorder.none,
+                          contentPadding: EdgeInsets.fromLTRB(12, 8, 12, 8),
+                          suffixIcon: Icon(
+                            Icons.search,
+                            color: Color(0xff8f8f91),
+                            size: 24,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
-            child: Text(
+            const Text(
               'Special offers',
               style: TextStyle(
                 fontSize: 18,
@@ -102,14 +125,7 @@ class _HomePageState extends State<HomePage> {
                 color: Color.fromARGB(255, 27, 27, 27),
               ),
             ),
-          ),
-          const Padding(
-            padding: EdgeInsets.only(
-              top: 5,
-              left: 10,
-              bottom: 10,
-            ),
-            child: Text(
+            const Text(
               'The best prices',
               style: TextStyle(
                 fontSize: 14,
@@ -117,95 +133,95 @@ class _HomePageState extends State<HomePage> {
                 color: Color.fromARGB(255, 51, 51, 51),
               ),
             ),
-          ),
-          Expanded(
-            child: GridView.builder(
-              padding: const EdgeInsets.all(10),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                childAspectRatio: 0.7,
-              ),
-              itemCount: items.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(8),
+            Expanded(
+              child: GridView.builder(
+                padding: const EdgeInsets.all(10),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  childAspectRatio: 0.7,
+                ),
+                itemCount: items.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(8),
+                      ),
                     ),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.05,
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
-                          ),
-                          image: DecorationImage(
-                            image:
-                                NetworkImage(items[index]['image'] as String),
-                            fit: BoxFit.fitHeight,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          height: MediaQuery.of(context).size.height * 0.05,
+                          decoration: BoxDecoration(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(10),
+                              topRight: Radius.circular(10),
+                            ),
+                            image: DecorationImage(
+                              image:
+                                  NetworkImage(items[index]['image'] as String),
+                              fit: BoxFit.fitHeight,
+                            ),
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              items[index]['title'] as String,
-                              style: TextStyle(fontSize: 16),
-                              maxLines: 1,
-                              overflow: TextOverflow.visible,
-                            ),
-                            const SizedBox(height: 5),
-                            Row(
-                              children: <Widget>[
-                                buildStarRating(
-                                  items[index]['rating']['rate'] as double,
-                                ),
-                                const SizedBox(width: 5),
-                              ],
-                            ),
-                            const SizedBox(height: 10),
-                            Row(
-                              children: [
-                                Text(
-                                  '\$ ${items[index]['price'].toString()}',
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
+                        Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                items[index]['title'] as String,
+                                style: const TextStyle(fontSize: 16),
+                                maxLines: 1,
+                                overflow: TextOverflow.visible,
+                              ),
+                              const SizedBox(height: 5),
+                              Row(
+                                children: <Widget>[
+                                  buildStarRating(
+                                    items[index]['rating']['rate'] as double,
                                   ),
-                                ),
-                                Expanded(child: Container()),
-                                Container(
-                                  margin: const EdgeInsets.only(
-                                    right: 10,
-                                    bottom: 10,
+                                  const SizedBox(width: 5),
+                                ],
+                              ),
+                              const SizedBox(height: 10),
+                              Row(
+                                children: [
+                                  Text(
+                                    '\$ ${items[index]['price'].toString()}',
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16,
+                                    ),
                                   ),
-                                  child: const Icon(Icons.favorite_border),
-                                ),
-                              ],
-                            ),
-                          ],
+                                  Expanded(child: Container()),
+                                  Container(
+                                    margin: const EdgeInsets.only(
+                                      right: 10,
+                                      bottom: 10,
+                                    ),
+                                    child: const Icon(Icons.favorite_border),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                );
-              },
+                      ],
+                    ),
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton(
-        backgroundColor: Color.fromARGB(255, 31, 108, 114),
+        backgroundColor: const Color.fromARGB(255, 31, 108, 114),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(8)),
         ),
