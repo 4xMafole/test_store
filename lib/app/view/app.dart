@@ -5,7 +5,6 @@ import 'package:test_store/authentication/authentication.dart';
 import 'package:test_store/home/home.dart';
 import 'package:test_store/l10n/l10n.dart';
 import 'package:test_store/login/view/login_page.dart';
-import 'package:test_store/login/view/login_page1.dart';
 import 'package:test_store/splash/splash.dart';
 import 'package:test_store/theme/theme.dart';
 import 'package:user_repository/user_repository.dart';
