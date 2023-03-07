@@ -1,116 +1,30 @@
+import 'package:authentication_repository/authentication_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginPage extends StatefulWidget {
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
+import 'package:test_store/login/bloc/login_bloc.dart';
+import 'package:test_store/login/view/login_form.dart';
 
-class _LoginPageState extends State<LoginPage> {
-  bool _isObscure = true;
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
+  static Route<void> route() {
+    return MaterialPageRoute(builder: (_) => const LoginPage());
+  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-
     return Scaffold(
       body: SingleChildScrollView(
         child: SizedBox(
           height: size.height,
-          child: Expanded(
-            child: Center(
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: size.height * 0.1,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      'eComerce',
-                      style: TextStyle(
-                        fontSize: size.width * 0.1,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    SizedBox(height: size.height * 0.09),
-                    SizedBox(
-                      width: size.width * 0.8,
-                      child: TextField(
-                        decoration: InputDecoration(
-                          hintText: 'User name',
-                          hintStyle: TextStyle(
-                            color: Colors.grey.shade500,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: size.height * 0.02),
-                    SizedBox(
-                      width: size.width * 0.8,
-                      child: TextFormField(
-                        obscureText: _isObscure,
-                        decoration: InputDecoration(
-                          focusColor: const Color.fromARGB(255, 31, 108, 114),
-                          hintText: 'Password',
-                          hintStyle: TextStyle(
-                            color: Colors.grey.shade500,
-                          ),
-                          suffixIcon: IconButton(
-                            icon: Icon(
-                              _isObscure
-                                  ? Icons.visibility_off_outlined
-                                  : Icons.visibility_outlined,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                _isObscure = !_isObscure;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: size.height * 0.02),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: GestureDetector(
-                        onTap: () {
-                          // Navigate to forgot password screen
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 30,
-                          ),
-                          child: const Text(
-                            'Forgot Password',
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 35, 118, 124),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: size.height * 0.07),
-                    SizedBox(
-                      width: size.width * 0.8,
-                      height: size.height * 0.07,
-                      child: ElevatedButton(
-                        style: const ButtonStyle(
-                          backgroundColor: MaterialStatePropertyAll(
-                            Color.fromARGB(255, 31, 108, 114),
-                          ),
-                        ),
-                        onPressed: () {
-                          // Handle login button press
-                        },
-                        child: const Text('Log In'),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+          child: BlocProvider(
+            create: (context) => LoginBloc(
+              authenticationRepository:
+                  RepositoryProvider.of<AuthenticationRepository>(context),
             ),
+            child: const LoginForm(),
           ),
         ),
       ),
