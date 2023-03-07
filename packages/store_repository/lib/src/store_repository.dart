@@ -14,6 +14,9 @@ class StoreRepository {
   /// Gets list of products from the an api.
   Future<List<Product>> getProducts() async {
     final products = await _fakeStoreApiClient.getProducts();
-    return products.map((e) => e as Product).toList();
+
+    return products
+        .map((e) =>Product.fromJson(e as Map<String, dynamic>))
+        .toList();
   }
 }

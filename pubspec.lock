@@ -660,6 +660,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.11.0"
+  store_api:
+    dependency: transitive
+    description:
+      path: "packages/store_api"
+      relative: true
+    source: path
+    version: "0.1.0+1"
   store_repository:
     dependency: "direct main"
     description:

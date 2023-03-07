@@ -33,7 +33,9 @@ class ProductsState extends Equatable {
     );
   }
 
-  Map<String, dynamic> toJson() => _$ProductStateToJson(this);
+  factory ProductsState.fromJson(Map<String, dynamic> json) => _$ProductsStateFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProductsStateToJson(this);
 
   @override
   List<Object?> get props => [status, products];

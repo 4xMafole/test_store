@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:store_repository/store_repository.dart'
@@ -8,8 +9,10 @@ import 'package:store_repository/store_repository.dart'
 part 'products_cubit.g.dart';
 part 'products_state.dart';
 
-class ProductsCubit extends Cubit<ProductsState> {
-  ProductsCubit(this._storeRepository) : super(ProductsState());
+class ProductsCubit extends HydratedCubit<ProductsState> {
+  ProductsCubit(this._storeRepository) : super(ProductsState()) {
+    fetchProducts();
+  }
   final StoreRepository _storeRepository;
 
   Future<void> fetchProducts() async {
@@ -17,7 +20,6 @@ class ProductsCubit extends Cubit<ProductsState> {
 
     try {
       final products = await _storeRepository.getProducts();
-
       emit(
         state.copyWith(
           products: products,
@@ -45,4 +47,11 @@ class ProductsCubit extends Cubit<ProductsState> {
       emit(state);
     }
   }
+
+  @override
+  ProductsState? fromJson(Map<String, dynamic> json) =>
+      ProductsState.fromJson(json);
+
+  @override
+  Map<String, dynamic>? toJson(ProductsState state) => state.toJson();
 }

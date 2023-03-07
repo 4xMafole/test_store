@@ -2,4 +2,4 @@
 library store_api;
 
 export 'src/models/models.dart';
-export 'src/store_api.dart';
+export 'src/store_api_client.dart';
