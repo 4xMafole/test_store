@@ -28,7 +28,12 @@ class _HomeViewState extends State<HomeView> {
         },
       ),
       body: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.only(
+          left: 10,
+          top: 32,
+          right: 10,
+          bottom: 10,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -115,7 +120,7 @@ class _HomeViewState extends State<HomeView> {
                     onRefresh: () async =>
                         context.read<ProductsCubit>().refreshProducts(),
                     child: GridView.builder(
-                      physics: const AlwaysScrollableScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       padding: const EdgeInsets.all(10),
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
