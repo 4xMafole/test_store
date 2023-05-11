@@ -24,7 +24,7 @@ dependencies:
   intl: ^0.17.0
   json_annotation: ^4.8.0
   json_serializable: ^6.6.1
-  path_provider: ^2.0.13
+  path_provider: ^2.0.15
   store_repository:
     path: packages/store_repository
   user_repository:
